@@ -7,7 +7,12 @@ function isValidId(req, res, next) {
   if (!isNaN(req.params.id)) return next();
   next(new Error('Invalid ID'));
 }
-
+function validBreak(breaks) {
+  const hasName = typeof breaks.name == 'string' && breaks.name.trim() != '';
+  const hasBreakType = typeof breaks.break_type == 'string' && breaks.break_type.trim() != '';
+  const hasState = typeof breaks.state == 'string' && breaks.state.trim() != '';
+  return hasState && hasName && hasBreakType;
+}
 
 
 router.get('/', (req, res) => {
@@ -22,21 +27,29 @@ router.get('/:id', isValidId, (req, res, next) => {
     else next(new Error('Invalid ID'))
   })
 })
+
 router.get('/:id/break', isValidId, (req, res, next) => {
   queries.getSurferBreaks(req.params.id).then(surfers =>{
     if (surfers) res.json(surfers)
     else next(new Error('Invalid ID'))
   })
 })
-// router.post('/:id/break', (req, res, next) => {
-//   if (validEvent(req.body)) {
-//     queries.createBreak(req.body).then(surfer => {
-//       res.json(surfer[0]);
-//     })
-//   } else {
-//     next(new Error('Invalid Event'))
-//   }
-// })
 
+router.post('/:id/break', isValidId,  (req, res, next) => {
+  if (validBreak(req.body)) {
+    queries.createBreak(
+      {
+        name: req.body.name,
+        break_type: req.body.break_type,
+        state: req.body.state,
+        surfer_id: req.params.id
+      }
+    ).then(surfer => {
+      res.json(surfer);
+    })
+  } else {
+    next(new Error('Invalid Break'))
+  }
+})
 
 module.exports = router

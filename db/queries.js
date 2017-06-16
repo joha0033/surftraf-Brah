@@ -16,8 +16,7 @@ module.exports = {
   getSurferBreaks(id) {
     return knex('break').where('surfer_id', id);
   },
-  // createBreak(id, ) {
-  //   return
-  // }
-
+  createBreak(breaks) {
+    return knex('break').insert(breaks,'*')
+  }
 }
