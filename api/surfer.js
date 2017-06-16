@@ -8,21 +8,34 @@ function isValidId(req, res, next) {
   next(new Error('Invalid ID'));
 }
 
-// function validPicture(pictures) {
-//   const validUrl = typeof pictures.url === 'string' && pictures.url.trim() != '';
-//   return validUrl;
-// }
+
 
 router.get('/', (req, res) => {
   queries.getAllSurfers().then(surfers =>{
     res.json(surfers);
   })
 })
-// router.getSurfer('/:id', isValidId, (req, res, next) => {
-//   queries.getOne(req.params.id).then(surfers =>{
-//     if (surfers) res.json(surfers)
-//     else next(new Error('Invalid ID'))
-//   })
+
+router.get('/:id', isValidId, (req, res, next) => {
+  queries.getOneSurfer(req.params.id).then(surfers =>{
+    if (surfers) res.json(surfers)
+    else next(new Error('Invalid ID'))
+  })
+})
+router.get('/:id/break', isValidId, (req, res, next) => {
+  queries.getSurferBreaks(req.params.id).then(surfers =>{
+    if (surfers) res.json(surfers)
+    else next(new Error('Invalid ID'))
+  })
+})
+// router.post('/:id/break', (req, res, next) => {
+//   if (validEvent(req.body)) {
+//     queries.createBreak(req.body).then(surfer => {
+//       res.json(surfer[0]);
+//     })
+//   } else {
+//     next(new Error('Invalid Event'))
+//   }
 // })
 
 
