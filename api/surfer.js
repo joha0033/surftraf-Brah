@@ -56,8 +56,7 @@ router.post('/:id/break', isValidId,  (req, res, next) => {
       {
         name: req.body.name,
         break_type: req.body.break_type,
-        state: req.body.state,
-        surfer_id: req.params.id
+        state: req.body.state
       }
     ).then(surfer => {
       res.json(surfer);

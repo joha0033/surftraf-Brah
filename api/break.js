@@ -1,4 +1,5 @@
 const express = require('express');
+const knex = require('../db/knex')
 const router = express.Router();
 
 const queries = require('../db/queries');
@@ -27,6 +28,26 @@ router.get('/:id', isValidId, (req, res, next) => {
     if (breaks) res.json(breaks)
     else next(new Error('Invalid ID'))
   })
+})
+router.get('/:id/surfers', isValidId, (req, res, next) => {
+ queries.getSurfersAtBreak(req.params.id)
+ .then(breaks =>{
+   const breakBySurfer= {};
+   const surferAtBreak = [];
+   breaks.forEach(breaksTwo => {
+     if (!breakBySurfer[breaksTwo.name]) {
+       const breaksWithAllSurfers = {
+         name: breaksTwo.name,
+         break_type: breaksTwo.break_type,
+         emails: []
+       };
+       surferAtBreak.push(breaksWithAllSurfers);
+       breakBySurfer[breaksTwo.name] = breaksWithAllSurfers;
+     }
+     breakBySurfer[breaksTwo.name].emails.push(breaksTwo.email)
+   })
+   res.json(surferAtBreak)
+ })
 })
 
 module.exports = router
