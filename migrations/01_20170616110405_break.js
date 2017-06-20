@@ -5,7 +5,6 @@ exports.up = function(knex, Promise) {
     table.text('name').notNullable();
     table.text('break_type').notNullable();
     table.text('state').notNullable();
-    table.integer('surfer_id').references('surfer.id').unsigned().onDelete('cascade');
   })
 };
 

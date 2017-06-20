@@ -6,6 +6,8 @@ exports.up = function(knex, Promise) {
     table.text('password').notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now()).notNullable();
     table.boolean('is_active').notNullable();
+    table.integer('break_id').references('break.id').unsigned().onDelete('cascade');
+
   })
 };
 

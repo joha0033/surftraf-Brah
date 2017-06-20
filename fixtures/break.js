@@ -2,56 +2,56 @@ module.exports = [
   {
     name: 'Mayport Poles',
     break_type: 'Beach',
-    state: 'Florida',
-    surfer_id: 1
+    state: 'Florida'
+
   },
   {
     name: 'Tourmalines',
     break_type: 'Beach',
-    state: 'California',
-    surfer_id: 2
+    state: 'California'
+
   },
   {
     name: 'Sunset Cliffs',
     break_type: 'Reef',
-    state: 'California',
-    surfer_id: 3
+    state: 'California'
+
   },
   {
     name: 'Jacksonville Beach Pier',
     break_type: 'Beach',
-    state: 'Florida',
-    surfer_id: 1
+    state: 'Florida'
+
   },
   {
     name: 'Mavericks',
     break_type: 'Reef',
-    state: 'California',
-    surfer_id: 2
+    state: 'California'
+
   },
   {
     name: '38th Street',
     break_type: 'Beach',
-    state: 'California',
-    surfer_id: 3
+    state: 'California'
+
   },
   {
     name: 'New Symerna Pier',
     break_type: 'Beach',
-    state: 'Florida',
-    surfer_id: 1
+    state: 'Florida'
+
   },
   {
     name: 'Big Sur',
     break_type: 'Reef',
-    state: 'California',
-    surfer_id: 2
+    state: 'California'
+
   },
   {
     name: 'K38',
     break_type: 'Reef',
-    state: 'Mexico',
-    surfer_id: 3
+    state: 'Mexico'
+
   }
 
 ]
