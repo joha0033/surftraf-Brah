@@ -29,24 +29,27 @@ router.get('/:id', isValidId, (req, res, next) => {
     else next(new Error('Invalid ID'))
   })
 })
+
 router.get('/:id/surfers', isValidId, (req, res, next) => {
  queries.getSurfersAtBreak(req.params.id)
- .then(breaks =>{
-   const breakBySurfer= {};
-   const surferAtBreak = [];
-   breaks.forEach(breaksTwo => {
-     if (!breakBySurfer[breaksTwo.name]) {
-       const breaksWithAllSurfers = {
-         name: breaksTwo.name,
-         break_type: breaksTwo.break_type,
-         emails: []
-       };
-       surferAtBreak.push(breaksWithAllSurfers);
-       breakBySurfer[breaksTwo.name] = breaksWithAllSurfers;
-     }
-     breakBySurfer[breaksTwo.name].emails.push(breaksTwo.email)
-   })
-   res.json(surferAtBreak)
+ .then(surfers =>{
+   res.json(surfers)
+  //  const breakBySurfer= {};
+  //  const surferAtBreak = [];
+  //  breaks.forEach(breaksTwo => {
+  //    if (!breakBySurfer[breaksTwo.name]) {
+  //      const breaksWithAllSurfers = {
+  //        name: breaksTwo.name,
+  //        break_type: breaksTwo.break_type,
+  //        emails: []
+  //      };
+  //      surferAtBreak.push(breaksWithAllSurfers);
+  //      breakBySurfer[breaksTwo.name] = breaksWithAllSurfers;
+  //    }
+   //
+  //    breakBySurfer[breaksTwo.name].emails.push(breaksTwo.email)
+  //  })
+  //  res.json(surferAtBreak[0])
  })
 })
 

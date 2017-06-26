@@ -13,22 +13,6 @@ function validBreak(breaks) {
   const hasState = typeof breaks.state == 'string' && breaks.state.trim() != '';
   return hasState && hasName && hasBreakType;
 }
-// TRYING TO COMBINE BREAKS WITH ALL SURFERS, WENT ABOUT IT WRONG.
-// const combineBreak = (breaks, res) => {
-//   const surferBreaks = [];
-//   const surferName = {}
-//   breaks.forEach(breaks => {
-//     if (!surferName[breaks.name]) {
-//       surferBreaks = {
-//         id: breaks.id,
-//         name: breaks.name,
-//         break_type: breaks.break_type,
-//         state: breaks.state
-//       }
-//     }
-//   })
-// }
-
 
 router.get('/', (req, res) => {
   queries.getAllSurfers().then(surfers =>{
@@ -38,6 +22,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', isValidId, (req, res, next) => {
   queries.getOneSurfer(req.params.id).then(surfers =>{
+    console.log(surfers);
     if (surfers) res.json(surfers)
     else next(new Error('Invalid ID'))
   })

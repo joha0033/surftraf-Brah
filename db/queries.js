@@ -17,9 +17,10 @@ module.exports = {
     return knex('break').where('surfer_id', id);
   },
   getSurfersAtBreak(id) {
-    return knex('break').where('break.id', id)
-    .select('break.id', 'break.name', 'break.break_type', 'surfer.email')
-    .join('surfer', 'surfer.break_id', 'break.id')
+    return knex('surfer').where('break_id', id)
+    // return knex('break').where('break.id', id)
+    // .select('break.id', 'break.name', 'break.break_type', 'surfer.email')
+    // .join('surfer', 'surfer.break_id', 'break.id')
   },
   createBreak(breaks) {
     return knex('break').insert(breaks,'*')
