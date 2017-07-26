@@ -53,4 +53,20 @@ router.get('/:id/surfers', isValidId, (req, res, next) => {
  })
 })
 
+router.post('/:id/break', isValidId,  (req, res, next) => {
+  if (validBreak(req.body)) {
+    queries.createBreak(
+      {
+        name: req.body.name,
+        break_type: req.body.break_type,
+        state: req.body.state
+      }
+    ).then(surfer => {
+      res.json(surfer);
+    })
+  } else {
+    next(new Error('Invalid Break'))
+  }
+})
+
 module.exports = router

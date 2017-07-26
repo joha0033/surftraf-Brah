@@ -8,6 +8,7 @@ function isValidId(req, res, next) {
   next(new Error('Invalid ID'));
 }
 function validBreak(breaks) {
+  console.log(breaks);
   const hasName = typeof breaks.name == 'string' && breaks.name.trim() != '';
   const hasBreakType = typeof breaks.break_type == 'string' && breaks.break_type.trim() != '';
   const hasState = typeof breaks.state == 'string' && breaks.state.trim() != '';
@@ -35,13 +36,13 @@ router.get('/:id/break', isValidId, (req, res, next) => {
   })
 })
 
-router.post('/:id/break', isValidId,  (req, res, next) => {
+router.post('/:id/surfer', isValidId,  (req, res, next) => {
   if (validBreak(req.body)) {
     queries.createBreak(
       {
-        name: req.body.name,
-        break_type: req.body.break_type,
-        state: req.body.state
+        email: req.body.email,
+        password: req.body.password,
+        is_active: true
       }
     ).then(surfer => {
       res.json(surfer);
